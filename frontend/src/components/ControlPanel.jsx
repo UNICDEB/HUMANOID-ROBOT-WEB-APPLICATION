@@ -13,7 +13,7 @@ export default function ControlPanel({ speak }) {
   };
 
   return (
-    <div>
+    <div style={{ marginTop: "20px", textAlign: "center" }}>
       <button onClick={() => speak("Hello! How can I help you?")}>
         Demo Speak
       </button>
