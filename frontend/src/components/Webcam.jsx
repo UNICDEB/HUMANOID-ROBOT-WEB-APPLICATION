@@ -18,10 +18,17 @@ export default function Webcam() {
   const videoRef = useRef();
 
   useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
-      videoRef.current.srcObject = stream;
-    });
+    const startCamera = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        videoRef.current.srcObject = stream;
+      } catch (err) {
+        console.error("Camera error:", err);
+      }
+    };
+
+    startCamera();
   }, []);
 
-  return <video ref={videoRef} autoPlay />;
+  return <video ref={videoRef} autoPlay playsInline muted />;
 }

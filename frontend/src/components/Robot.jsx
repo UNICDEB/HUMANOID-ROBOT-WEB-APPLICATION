@@ -17,55 +17,42 @@
 import React, { useEffect, useRef } from "react";
 
 export default function Robot({ text, speaking, mood }) {
-const ref = useRef();
+  const ref = useRef();
 
-// Head movement (follows mouse)
-useEffect(() => {
-const move = (e) => {
-const x = (window.innerWidth / 2 - e.clientX) / 40;
-const y = (window.innerHeight / 2 - e.clientY) / 40;
+  useEffect(() => {
+    const move = (e) => {
+      const x = (window.innerWidth / 2 - e.clientX) / 40;
+      const y = (window.innerHeight / 2 - e.clientY) / 40;
 
+      if (ref.current) {
+        ref.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+      }
+    };
 
-  if (ref.current) {
-    ref.current.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-  }
-};
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
+  }, []);
 
-window.addEventListener("mousemove", move);
-return () => window.removeEventListener("mousemove", move);
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      
+      <div ref={ref} className={`robot ${speaking ? "speaking" : ""} ${mood}`}>
+        <div className="eye left"></div>
+        <div className="eye right"></div>
+        <div className="mouth"></div>
+      </div>
 
+      <p className="robot-text">{text}</p>
 
-}, []);
-
-return (
-<div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-
-
-  {/* ROBOT HEAD */}
-  <div
-    ref={ref}
-    className={`robot ${speaking ? "speaking" : ""} ${mood}`}
-  >
-    <div className="eye left"></div>
-    <div className="eye right"></div>
-    <div className="mouth"></div>
-  </div>
-
-  {/* SPEAKING TEXT */}
-  <p className="robot-text">{text}</p>
-
-  {/* VOICE WAVE ANIMATION */}
-  {speaking && (
-    <div className="wave">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+      {speaking && (
+        <div className="wave">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      )}
     </div>
-  )}
-</div>
-
-
-);
+  );
 }

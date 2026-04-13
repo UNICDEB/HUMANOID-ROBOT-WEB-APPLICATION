@@ -2,9 +2,17 @@
 body {
   margin: 0;
   font-family: "Segoe UI", sans-serif;
-  background: radial-gradient(circle at top, #0f172a, #020617);
+  background: linear-gradient(270deg, #020617, #0f172a, #020617);
+  background-size: 600% 600%;
+  animation: bgMove 15s ease infinite;
   color: white;
   overflow: hidden;
+}
+
+@keyframes bgMove {
+  0% { background-position: 0% }
+  50% { background-position: 100% }
+  100% { background-position: 0% }
 }
 
 /* ===== LAYOUT ===== */
@@ -16,73 +24,77 @@ body {
   gap: 20px;
 }
 
+/* ===== GLASS PANELS ===== */
 .left, .right {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(20px);
-  border-radius: 20px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(25px);
+  border-radius: 25px;
+
   border: 1px solid rgba(255,255,255,0.1);
+
+  box-shadow:
+    inset 0 0 20px rgba(255,255,255,0.05),
+    0 0 40px rgba(59,130,246,0.2);
 }
 
 /* ===== ROBOT ===== */
 .robot {
-  width: 220px;
-  height: 220px;
+  width: 230px;
+  height: 230px;
   border-radius: 50%;
   background: linear-gradient(135deg, #3b82f6, #9333ea);
 
   box-shadow:
-    0 0 20px rgba(147,51,234,0.8),
-    0 0 60px rgba(59,130,246,0.6),
-    inset 0 0 20px rgba(255,255,255,0.1);
+    0 0 30px rgba(147,51,234,0.9),
+    0 0 80px rgba(59,130,246,0.7),
+    inset 0 0 25px rgba(255,255,255,0.1);
 
   position: relative;
   animation: float 4s ease-in-out infinite;
-  transition: all 0.3s ease;
 }
 
-/* FLOAT ANIMATION */
 @keyframes float {
   0% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+  50% { transform: translateY(-15px); }
   100% { transform: translateY(0px); }
 }
 
 /* ===== EYES ===== */
 .eye {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   background: #00ffff;
   border-radius: 50%;
   position: absolute;
-  top: 65px;
-  box-shadow: 0 0 15px #00ffff;
+  top: 70px;
+  box-shadow: 0 0 20px #00ffff;
   animation: blink 4s infinite;
 }
 
-.eye.left { left: 45px; }
-.eye.right { right: 45px; }
+.eye.left { left: 50px; }
+.eye.right { right: 50px; }
 
 @keyframes blink {
-  0%, 90%, 100% { height: 28px; }
+  0%, 90%, 100% { height: 30px; }
   95% { height: 6px; }
 }
 
 /* ===== MOUTH ===== */
 .mouth {
-  width: 80px;
+  width: 90px;
   height: 12px;
   background: white;
   position: absolute;
-  bottom: 55px;
+  bottom: 60px;
   left: 50%;
   transform: translateX(-50%);
   border-radius: 20px;
-  transition: all 0.2s;
 }
 
 .speaking .mouth {
@@ -91,23 +103,23 @@ body {
 
 @keyframes speak {
   0% { height: 10px; }
-  50% { height: 28px; }
+  50% { height: 30px; }
   100% { height: 10px; }
 }
 
 /* ===== TEXT ===== */
 .robot-text {
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 20px;
   color: #38bdf8;
-  text-shadow: 0 0 10px #38bdf8;
+  text-shadow: 0 0 15px #38bdf8;
 }
 
 /* ===== WAVE ===== */
 .wave {
   display: flex;
-  gap: 5px;
-  margin-top: 10px;
+  gap: 6px;
+  margin-top: 12px;
 }
 
 .wave span {
@@ -125,37 +137,35 @@ body {
 
 @keyframes wave {
   0%,100% { height: 10px; }
-  50% { height: 35px; }
+  50% { height: 40px; }
 }
 
-/* ===== CONTROL PANEL ===== */
+/* ===== BUTTONS ===== */
 button {
   background: linear-gradient(135deg, #2563eb, #9333ea);
-  color: white;
   border: none;
-  padding: 10px 16px;
-  margin: 5px;
-  border-radius: 10px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  color: white;
   cursor: pointer;
   transition: 0.3s;
-  box-shadow: 0 0 10px rgba(147,51,234,0.5);
+  box-shadow: 0 0 15px rgba(147,51,234,0.6);
 }
 
 button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(147,51,234,0.9);
+  transform: scale(1.08);
+  box-shadow: 0 0 30px rgba(147,51,234,1);
 }
 
-/* INPUT */
+/* ===== INPUT ===== */
 input {
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 12px;
   border: none;
-  margin: 5px;
-  width: 200px;
-  outline: none;
-  background: rgba(255,255,255,0.1);
+  width: 220px;
+  background: rgba(255,255,255,0.08);
   color: white;
+  outline: none;
 }
 
 /* ===== WEBCAM ===== */
@@ -164,5 +174,32 @@ video {
   height: 100%;
   object-fit: cover;
   border-radius: 20px;
-  border: 2px solid rgba(255,255,255,0.1);
+
+  box-shadow:
+    0 0 20px rgba(0,255,255,0.3),
+    inset 0 0 20px rgba(0,255,255,0.2);
+}
+
+/* ===== AI HUD BORDER ===== */
+.right::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 25px;
+  border: 2px solid rgba(0,255,255,0.2);
+  pointer-events: none;
+}
+
+#particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;   /* VERY IMPORTANT */
+}
+
+.container {
+  position: relative;
+  z-index: 1;
 }
