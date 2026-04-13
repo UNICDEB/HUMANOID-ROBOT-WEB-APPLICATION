@@ -3,10 +3,22 @@ import React, { useState } from "react";
 export default function ControlPanel({ speak }) {
   const [input, setInput] = useState("");
 
-  return (
-    <div style={{ marginTop: "20px" }}>
+  const startVoice = () => {
+    const recognition = new window.webkitSpeechRecognition();
+    recognition.onresult = (event) => {
+      const text = event.results[0][0].transcript;
+      speak(text);
+    };
+    recognition.start();
+  };
 
-      <button onClick={() => speak("Hello! How can I help you?")}>Speak Demo</button>
+  return (
+    <div>
+      <button onClick={() => speak("Hello! How can I help you?")}>
+        Demo Speak
+      </button>
+
+      <button onClick={startVoice}>🎤 Voice Input</button>
 
       <br />
 
@@ -17,7 +29,6 @@ export default function ControlPanel({ speak }) {
       />
 
       <button onClick={() => speak(input)}>Send</button>
-
     </div>
   );
 }

@@ -9,7 +9,5 @@ export default function Webcam() {
     });
   }, []);
 
-  return (
-    <video ref={ref} autoPlay width="400" style={{ borderRadius: "10px" }} />
-  );
+  return <video ref={ref} autoPlay />;
 }
