@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  background: #0f172a;
+  color: white;
+  font-family: Arial;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+}
+
+.left, .right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.robot-head {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #3b82f6, #9333ea);
+  position: relative;
+  animation: idle 2s infinite;
+}
+
+.eye {
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 40px;
+}
+
+.eye.left { left: 30px; }
+.eye.right { right: 30px; }
+
+.mouth {
+  width: 60px;
+  height: 10px;
+  background: white;
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px;
+}
+
+.speaking .mouth {
+  animation: talk 0.3s infinite;
+}
+
+@keyframes talk {
+  0% { height: 10px; }
+  50% { height: 20px; }
+  100% { height: 10px; }
+}
+
+@keyframes idle {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+button {
+  margin: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}

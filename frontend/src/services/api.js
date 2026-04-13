@@ -1,5 +1,6 @@
 import axios from "axios";
 
-export const detectUser = () => axios.get("http://localhost:8000/detect");
-export const registerUser = (data) => axios.post("http://localhost:8000/register", data);
-export const chat = (text) => axios.post("http://localhost:8000/chat", { text });
+export const sendMessage = async (text) => {
+  const res = await axios.post("http://localhost:8000/chat", { text });
+  return res.data.response;
+};

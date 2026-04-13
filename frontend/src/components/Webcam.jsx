@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-export default function CameraView() {
+export default function Webcam() {
   const ref = useRef();
 
   useEffect(() => {
@@ -9,5 +9,7 @@ export default function CameraView() {
     });
   }, []);
 
-  return <video ref={ref} autoPlay />;
+  return (
+    <video ref={ref} autoPlay width="400" style={{ borderRadius: "10px" }} />
+  );
 }
